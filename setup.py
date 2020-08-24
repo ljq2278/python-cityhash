@@ -34,12 +34,17 @@ class BinaryDistribution(Distribution):
         # TODO: check if this is still necessary with Python v2.7
         return False
 
+import os
 
-CXXFLAGS = """
--O3
--Wno-unused-value
--Wno-unused-function
-""".split()
+if os.name == 'nt':
+
+    CXXFLAGS = []
+else:
+    CXXFLAGS = """
+    -O3
+    -Wno-unused-value
+    -Wno-unused-function
+    """.split()
 
 if have_sse42:
     CXXFLAGS.append('-msse4.2')
